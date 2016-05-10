@@ -1,8 +1,12 @@
 alias ls='ls -FG'
+alias lsa='ls -A'
+alias lst='ls -t'
+alias r='fc -e -'
 alias pasftp='ftp 9723.pilchuckaudubon@216.211.129.207'
 alias v=vdir
-alias va='v -a'
+alias va='v -A'
 alias vdir='ls -l'
+alias vt='v -t'
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
