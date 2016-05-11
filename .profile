@@ -1,3 +1,4 @@
+alias dir=ls
 alias ls='ls -FG'
 alias lsa='ls -A'
 alias lsd='ls -d'
@@ -6,6 +7,7 @@ alias r='fc -e -'
 alias pasftp='ftp 9723.pilchuckaudubon@216.211.129.207'
 alias v=vdir
 alias va='v -A'
+alias vd='v -d'
 alias vdir='ls -l'
 alias vt='v -t'
 
