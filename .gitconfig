@@ -1,6 +1,7 @@
 [user]
 	name = Terry Nightingale
 	email = tnight@pobox.com
+	signingkey = 53E12F65
 [core]
 	editor = emacs
 [alias]
