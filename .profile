@@ -1,5 +1,6 @@
 alias ls='ls -FG'
 alias lsa='ls -A'
+alias lsd='ls -d'
 alias lst='ls -t'
 alias r='fc -e -'
 alias pasftp='ftp 9723.pilchuckaudubon@216.211.129.207'
