@@ -12,3 +12,12 @@
 	unstage = reset HEAD --
 	last = log -1 HEAD
 	visual = !gitk
+[help]
+	autocorrect = 50
+[merge]
+	tool = extMerge
+[mergetool "extMerge"]
+	cmd = extMerge \\\"$BASE\\\" \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$MERGED\\\"
+	trustExitCode = false
+[diff]
+	external = extDiff
