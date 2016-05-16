@@ -21,3 +21,7 @@
 	trustExitCode = false
 [diff]
 	external = extDiff
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
