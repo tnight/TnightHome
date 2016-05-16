@@ -17,9 +17,13 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-PATH="$HOME/bin:$PATH"
-
 GIT_OAUTH_TOKEN="495d1860d90421bc553b615e356652506917b3be"
 export GIT_OAUTH_TOKEN
+
+PATH="$HOME/bin:$PATH"
+
+# Handy GIT-oriented shell prompt
+source /usr/local/bin/git-prompt.sh
+PS1='[\h:\W \u$(__git_ps1 " (%s)")]\$ '
 
 # End of file
