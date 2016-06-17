@@ -46,7 +46,7 @@ fi
 # Mount the drive
 if mkdir /Volumes/share; then
     echo "Mounting..."
-    mount $readOnlyOption -t smbfs -o nodev,nosuid smb://terryn:9bum9z3n@hs-dhtgl5f5/share /Volumes/share
+    mount $readOnlyOption -t smbfs -o nodev,nosuid smb://terryn:@hs-dhtgl5f5/share /Volumes/share
     echo "Mounted."
 else
     echo "NOT mounted."
