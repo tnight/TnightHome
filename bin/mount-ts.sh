@@ -10,6 +10,7 @@ function usage
 ### Main
 readOnly=''
 readWrite=''
+success=''
 
 # Get our command line arguments
 while [ "$1" != '' ]
@@ -44,12 +45,20 @@ then
 fi
 
 # Mount the drive
-if mkdir /Volumes/share; then
+if mkdir -p /Volumes/share; then
     echo "Mounting..."
-    mount $readOnlyOption -t smbfs -o nodev,nosuid smb://terryn:@hs-dhtgl5f5/share /Volumes/share
+    if mount $readOnlyOption -t smbfs -o nodev,nosuid smb://terryn:@hs-dhtgl5f5/share /Volumes/share; then
+        success=1
+    fi
+fi
+
+if [[ $success ]]
+then       
     echo "Mounted."
+    exit 0
 else
     echo "NOT mounted."
+    exit 1
 fi
 
 # End of file
