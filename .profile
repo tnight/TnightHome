@@ -1,3 +1,5 @@
+alias blt='tail /Volumes/share/b*'
+alias blv='v /Volumes/share/b*'
 alias dir=ls
 alias ls='ls -FG'
 alias lsa='ls -A'
