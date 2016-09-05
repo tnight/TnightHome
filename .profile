@@ -28,4 +28,7 @@ PATH="$HOME/bin:$PATH"
 source /usr/local/bin/git-prompt.sh
 PS1='[\h:\W \u$(__git_ps1 " (%s)")]\$ '
 
+# Needed for perlbrew
+source ~/perl5/perlbrew/etc/bashrc
+
 # End of file
