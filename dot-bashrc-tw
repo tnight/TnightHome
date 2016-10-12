@@ -1,0 +1,138 @@
+#
+# Program:  .profile
+# Language: Bourne Shell (Unix-like environment)
+#
+# This file sets up my shell environment.
+#
+#
+#==============================================================================
+# Date       Programmer        Changes
+# ------------------------------------------------
+#
+# ??/??/???? Terry Nightingale Created.
+#
+# ??/??/???? Terry Nightingale Lots of undocumented changes.
+#
+# 03/01/2002 Terry Nightingale Consolidated Cygwin, Linux, and AIX profiles.
+#
+#==============================================================================
+
+[[ $- != *i* ]] && return   # Exit if this is a shell script subshell
+
+# Make sure we can access the CVS repository
+### if [ `hostname` = "aixqtldev" ]
+### then
+###   export CVSROOT="/usr/local/cvsroot"
+### else
+###   export CVSROOT=":pserver:terryn@aixqtldev:/usr/local/cvsroot"
+### fi
+#
+if [ `hostname` = "control" ]
+then
+  export CVSROOT="/usr/local/cvsroot"
+else
+  export CVS_RSH=ssh
+  export CVSROOT=":ext:terryn@control:/usr/local/cvsroot"
+fi
+
+# Make sure we like the default editor
+export EDITOR='vi'
+
+# Make sure we can find our commands in the history list
+export HISTSIZE=5000
+
+# Make sure ls shows pretty colors
+export LS_COLORS='no=00:fi=00:di=36:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:*.jar=01;31:';
+
+# Make sure we like our pager
+export PAGER=less
+
+# Make sure we have a usable TERM (terminal) value
+if [ "$TERM" = "dumb" ]
+then
+  export TERM=xterm
+fi
+
+# Make sure /usr/local/bin is first in our path
+PATH=$(echo $PATH | sed -e "s/\/usr\/local\/bin://g")
+PATH="/usr/local/bin:$PATH"
+
+if [ "$0" = "-bash" -o "$0" = "bash" ]
+then
+    PS1="\u@\h \w $ "
+    ### . $HOME/.bashrc
+fi
+
+#
+# Operating-environment specifics
+#
+
+if [ "$OSTYPE" = "linux-gnu" ]
+then
+  # Remove /usr/kerberos/bin from our path
+  PATH=$(echo $PATH | sed -e "s/\/usr\/kerberos\/bin://g")
+fi
+
+if [ "$OSTYPE" = "cygwin" ]
+then
+  PATH="$PATH:$HOME/bin32:$HOME/bin"
+  :
+else
+  # Set Program Search Path
+  PATH="$PATH:/usr/WebSphere/AppServer/java/jre/sh"
+  PATH="$PATH:/usr/WebSphere/AppServer/java/sh"
+  PATH="$PATH:/usr/local/mysql/bin"
+  PATH="$PATH:/usr/bin:/etc:/usr/sbin:/usr/ucb:/usr/bin/X11:/sbin:."
+  PATH="$PATH:$HOME/bin"
+
+  # Set Java Classpath 
+  CLASSPATH=".:/usr/local/framework/"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/mm.mysql-2.0.4-bin.jar"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/JData2_0.jar"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/jdom.jar"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/junit.jar"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/junitperf.jar"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/log4j.jar"
+  CLASSPATH="$CLASSPATH:/usr/local/framework/jars/xerces.jar"
+fi
+
+export CLASSPATH PATH
+
+#
+# Host-specific options
+#
+
+### if [ "$HOSTNAME" = "twcdbg01" ]
+### then
+###   JAVA_HOME="/opt/IBMJava2-13"
+###   export JAVA_HOME
+### fi
+
+
+# Add additional aliases, etc. after this line
+alias cdup='cd ..'
+alias cvsd='~/bin/cvsd.sh'
+alias del='rm -i'
+alias dir=vdir
+alias e='~/bin/emacs.sh'
+alias ls='ls --color -F'
+alias ora='. ~/bin/oracleEnv.sh'
+alias pst='pstree -alpu'
+alias r='fc -e -'
+alias v=vdir
+alias vdir='ls -l'
+alias vi='~/bin/vim.sh'
+alias view='~/bin/vim.sh -R'
+
+if [ "$OSTYPE" = "cygwin" ]
+then
+  alias perldoc='cmd /c perldoc'
+fi
+
+# Put us in our home directory.
+cd $HOME
+
+# Make sure OSTYPE is exported to our subprocesses.
+export OSTYPE
+
+# End of file
