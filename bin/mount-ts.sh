@@ -1,5 +1,8 @@
 #!/bin/sh
 #
+# NOTE: this script requires that the user have write permission to
+# the /Volumes directory so it can create the mount point.
+#
 ########################################################################
 
 function usage
