@@ -14,13 +14,6 @@
 	visual = !gitk
 [help]
 	autocorrect = 50
-[merge]
-	tool = extMerge
-[mergetool "extMerge"]
-	cmd = extMerge \\\"$BASE\\\" \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$MERGED\\\"
-	trustExitCode = false
-[diff]
-	external = extDiff
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
