@@ -79,7 +79,6 @@ if [[ $isMountMode ]]; then
 	    cmd="$mkdirCmd"
 	fi
 
-	# TODO: make a subroutine that runs the command it is passed and returns the result of running it (true or false).
 	if eval "$cmd"; then
 	    echo "Made directory for mount point."
 	else
@@ -120,7 +119,6 @@ else
 fi
 
 # Check for whether the link already exists; if so, don't create it. Likewise when unlinking, if the link does not exist, don't bother trying to unlink.
-
 isLinkCmdNeeded=''
 if [[ $isMountMode ]]; then
     if [[ ! -d "$linkTo" ]]; then
