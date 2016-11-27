@@ -9,30 +9,44 @@
 
 function usage
 {
-    echo "usage: mount-ts.sh [[-r] | [-w] | [-n] | [--read-only] | [--read-write] | [--dry-run] | [-h]]"
+    read -r -d '' usage <<- 'EOF'
+	usage: mount-ts.sh [[-h] | [-r] | [-w] | [-u] | [-n] | [--read-only] | [--read-write] | [--unmount] | [--dry-run] | [--help]]
+	{-h|--help}: Print this usage message
+	{-r|--read-only}: Mount the file share in read-only mode
+	{-w|--read-write}: Mount the file share in read-write mode
+	{-u|--unmount}: Unmount the file shrae instead of mounting it
+	{-n|--dry-run}: Just print the comamnds we would have run; do not run them
+
+	NOTE: exactly one of {-r|--read-only}, {-w|--read-write}, or {-u|--unmount} must be specified.
+EOF
+    echo "$usage"
 }
 
 ### Main
-dryRun=''
+isDryRun=''
+isReadOnly=''
+isReadWrite=''
+isMountMode=1
 linkTo='/Volumes/share'
 mountPoint="${HOME}/Volumes/share"
-readOnly=''
-readWrite=''
+readOnlyOption=''
 remoteHost='192.168.0.10'
-success=''
 username='terryn'
 
 # Get our command line arguments
 while [ "$1" != '' ]; do
     case $1 in
         -r | --read-only )      shift
-                                readOnly=1
+                                isReadOnly=1
                                 ;;
         -w | --read-write )     shift
-                                readWrite=1
+                                isReadWrite=1
+                                ;;
+        -u | --unmount )        shift
+                                isMountMode=''
                                 ;;
         -n | --dry-run )        shift
-                                dryRun=1
+                                isDryRun=1
                                 ;;
         -h | --help )           usage
                                 exit 0
@@ -42,73 +56,108 @@ while [ "$1" != '' ]; do
     esac
 done
 
-# Either read-only or read-write mode must be specified, but not both
-if [[ ($readOnly && $readWrite) || (! $readOnly && ! $readWrite) ]]
-then
+# We must be in one and only one of these modes: "mount read-only," "mount read-write," or "unmount."
+if [[ ! ( (! $isReadOnly && ! $isReadWrite && ! $isMountMode) || (! $isReadOnly && $isReadWrite && $isMountMode) || ($isReadOnly && ! $isReadWrite && $isMountMode) ) ]]; then
    usage
    exit 1
 fi
 
-# Set the mounting option
-readOnlyOption=''
-if [[ $readOnly ]]; then
+# Set the mounting option if we are in read-only mounting mode.
+if [[ $isReadOnly ]]; then
     readOnlyOption='-r '
 fi
 
-# Make sure the mount point exists
-mkdirCmd="mkdir -p $mountPoint"
-if [[ $dryRun ]]; then
-    cmd="echo \"Would have run: [$mkdirCmd]\""
-else
-    cmd="$mkdirCmd"
-fi
+if [[ $isMountMode ]]; then
+    # Make sure the mount point exists
+    if [[ -d "$mountPoint" ]]; then
+	echo "Found mount point [$mountPoint]; skipping mkdir command."
+    else
+	mkdirCmd="mkdir -p $mountPoint"
+	if [[ $isDryRun ]]; then
+	    cmd="echo \"Would have run: [$mkdirCmd]\""
+	else
+	    cmd="$mkdirCmd"
+	fi
 
-if eval "$cmd"; then
-    echo "Made directory for mount point."
+	# TODO: make a subroutine that runs the command it is passed and returns the result of running it (true or false).
+	if eval "$cmd"; then
+	    echo "Made directory for mount point."
+	else
+	    echo "Failed to make directory for mount point."
+	    exit 1
+	fi
+    fi
 
     # Mount the drive
     echo "Mounting..."
     mountCmd="mount $readOnlyOption -t smbfs -o nodev,nosuid smb://${username}:@${remoteHost}/share $mountPoint"
-    if [[ $dryRun ]]; then
+    if [[ $isDryRun ]]; then
 	cmd="echo \"Would have run: [$mountCmd]\""
     else
 	cmd="$mountCmd"
     fi
     if eval "$cmd"; then
-	success=1
+	echo "Mounted."
+    else
+	echo "NOT mounted."
+	exit 1
     fi
 else
-    echo "Make directory command FAILED: [$cmd]."
+    # Unmount the drive
+    echo "Unmounting..."
+    unmountCmd="umount $mountPoint"
+    if [[ $isDryRun ]]; then
+	cmd="echo \"Would have run: [$unmountCmd]\""
+    else
+	cmd="$unmountCmd"
+    fi
+    if eval "$cmd"; then
+	echo "Unmounted."
+    else
+	echo "NOT unmounted."
+	exit 1
+    fi
 fi
 
-if [[ $success ]]
-then       
-    echo "Mounted."
+# Check for whether the link already exists; if so, don't create it. Likewise when unlinking, if the link does not exist, don't bother trying to unlink.
+
+isLinkCmdNeeded=''
+if [[ $isMountMode ]]; then
+    if [[ ! -d "$linkTo" ]]; then
+	isLinkCmdNeeded=1
+	lnCmd="sudo ln -s \"$mountPoint\" \"$linkTo\""
+    fi
 else
-    echo "NOT mounted."
+    if [[ -d "$linkTo" ]]; then
+	isLinkCmdNeeded=1
+	lnCmd="sudo rm \"$linkTo\""
+    fi
 fi
 
-if [[ $success ]]; then
-    lnCmd="sudo ln -s \"$mountPoint\" \"$linkTo\""
-    if [[ $dryRun ]]; then
+if [[ ! $isLinkCmdNeeded ]]; then
+    echo "Skipping unnecessary link-related command."
+else
+    if [[ $isDryRun ]]; then
 	cmd="echo \"Would have run: [$lnCmd]\""
     else
 	cmd="$lnCmd"
     fi
-    if eval "$cmd"; then
-	success=1
-    else
-	success=''
-    fi
-fi
 
-if [[ $success ]]
-then
-    echo "Linked."
-    exit 0
-else
-    echo "NOT linked."
-    exit 1
+    if eval "$cmd"; then
+	if [[ $isMountMode ]]; then
+	    echo "Linked."
+	else
+	    echo "Unlinked."
+	fi
+	exit 0
+    else
+	if [[ $isMountMode ]]; then
+	    echo "NOT linked."
+	else
+	    echo "NOT unlinked."
+	    exit 1
+	fi
+    fi
 fi
 
 # End of file
