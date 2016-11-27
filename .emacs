@@ -41,4 +41,7 @@
 
 (add-hook 'ange-ftp-process-startup-hook 'ange-ftp-msdos-dirstyle-off)
 
+;; changing the command to control
+(setq mac-command-modifier 'control)
+
 ;; END of .emacs
