@@ -1,6 +1,7 @@
 alias blt='tail /Volumes/share/b*'
 alias blv='v /Volumes/share/b*'
 alias dir=ls
+alias gba='git branch -a'
 alias ls='ls -FG'
 alias lsa='ls -A'
 alias lsd='ls -d'
