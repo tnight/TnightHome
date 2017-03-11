@@ -1,5 +1,6 @@
-alias blt='tail /Volumes/share/b*'
-alias blv='v /Volumes/share/b*'
+alias blm='mv -v /Volumes/share/b*.txt /Volumes/share/zzBackUpLogArchive'
+alias blt='tail /Volumes/share/b*.txt'
+alias blv='v /Volumes/share/b*.txt'
 alias dir=ls
 alias gba='git branch -a'
 alias ls='ls -FG'
