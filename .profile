@@ -11,7 +11,6 @@ alias lst='ls -t'
 alias mtro='mount-ts.sh --read-only'
 alias mtrw='mount-ts.sh --read-write'
 alias r='fc -e -'
-alias pasftp='ftp 9723.pilchuckaudubon@216.211.129.207'
 alias umt='mount-ts.sh --unmount'
 alias v=vdir
 alias va='v -A'
