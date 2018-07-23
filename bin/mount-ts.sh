@@ -30,7 +30,7 @@ isMountMode=1
 linkTo='/Volumes/share'
 mountPoint="${HOME}/Volumes/share"
 readOnlyOption=''
-remoteHost='192.168.1.10'
+remoteHost='192.168.0.100'
 username='terryn'
 
 # Get our command line arguments
