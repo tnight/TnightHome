@@ -1,6 +1,7 @@
 alias blm='mv -v /Volumes/share/b*.txt /Volumes/share/zzBackUpLogArchive'
 alias blt='tail /Volumes/share/b*.txt'
 alias blv='v /Volumes/share/b*.txt'
+alias del='rm -i'
 alias dir=ls
 alias gb='git branch'
 alias gba='git branch -a'
