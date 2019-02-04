@@ -11,11 +11,12 @@ function usage
 {
     read -r -d '' usage <<- 'EOF'
 	usage: mount-ts.sh [[-h] | [-r] | [-w] | [-u] | [-n] | [--read-only] | [--read-write] | [--unmount] | [--dry-run] | [--help]]
+        {-f|--force}: Force the unmounting of the file share
 	{-h|--help}: Print this usage message
-	{-r|--read-only}: Mount the file share in read-only mode
-	{-w|--read-write}: Mount the file share in read-write mode
-	{-u|--unmount}: Unmount the file shrae instead of mounting it
 	{-n|--dry-run}: Just print the comamnds we would have run; do not run them
+	{-r|--read-only}: Mount the file share in read-only mode
+	{-u|--unmount}: Unmount the file share instead of mounting it
+	{-w|--read-write}: Mount the file share in read-write mode
 
 	NOTE: exactly one of {-r|--read-only}, {-w|--read-write}, or {-u|--unmount} must be specified.
 EOF
@@ -23,7 +24,9 @@ EOF
 }
 
 ### Main
+forcedOption=''
 isDryRun=''
+isForced=''
 isReadOnly=''
 isReadWrite=''
 isMountMode=1
@@ -36,20 +39,23 @@ username='terryn'
 # Get our command line arguments
 while [ "$1" != '' ]; do
     case $1 in
-        -r | --read-only )      shift
-                                isReadOnly=1
-                                ;;
-        -w | --read-write )     shift
-                                isReadWrite=1
-                                ;;
-        -u | --unmount )        shift
-                                isMountMode=''
+	-f | --force )          shift
+				isForced=1
+				;;
+        -h | --help )           usage
+                                exit 0
                                 ;;
         -n | --dry-run )        shift
                                 isDryRun=1
                                 ;;
-        -h | --help )           usage
-                                exit 0
+        -r | --read-only )      shift
+                                isReadOnly=1
+                                ;;
+        -u | --unmount )        shift
+                                isMountMode=''
+                                ;;
+        -w | --read-write )     shift
+                                isReadWrite=1
                                 ;;
         * )                     usage
                                 exit 1
@@ -60,6 +66,11 @@ done
 if [[ ! ( (! $isReadOnly && ! $isReadWrite && ! $isMountMode) || (! $isReadOnly && $isReadWrite && $isMountMode) || ($isReadOnly && ! $isReadWrite && $isMountMode) ) ]]; then
    usage
    exit 1
+fi
+
+# Set the mounting option if we are in forced mode.
+if [[ $isForced ]]; then
+    forcedOption='-f '
 fi
 
 # Set the mounting option if we are in read-only mounting mode.
@@ -104,7 +115,7 @@ if [[ $isMountMode ]]; then
 else
     # Unmount the drive
     echo "Unmounting..."
-    unmountCmd="umount $mountPoint"
+    unmountCmd="umount $forcedOption $mountPoint"
     if [[ $isDryRun ]]; then
 	cmd="echo \"Would have run: [$unmountCmd]\""
     else

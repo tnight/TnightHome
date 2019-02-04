@@ -18,6 +18,7 @@ alias mtro='mount-ts.sh --read-only'
 alias mtrw='mount-ts.sh --read-write'
 alias r='fc -e -'
 alias umt='mount-ts.sh --unmount'
+alias umtf='mount-ts.sh --force --unmount'
 alias v=vdir
 alias va='v -A'
 alias vd='v -d'
