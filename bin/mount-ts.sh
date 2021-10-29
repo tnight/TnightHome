@@ -25,6 +25,7 @@ EOF
 
 ### Main
 forcedOption=''
+fsType='afpfs'
 isDryRun=''
 isForced=''
 isReadOnly=''
@@ -33,8 +34,9 @@ isMountMode=1
 linkTo='/Volumes/share'
 mountPoint="${HOME}/Volumes/share"
 readOnlyOption=''
-remoteHost='192.168.0.100'
-username='terryn'
+remoteHost='192.168.0.101'
+remotePath='/share'
+username='tnight'
 
 # Get our command line arguments
 while [ "$1" != '' ]; do
@@ -100,7 +102,9 @@ if [[ $isMountMode ]]; then
 
     # Mount the drive
     echo "Mounting..."
-    mountCmd="mount $readOnlyOption -t smbfs -o nodev,nosuid smb://${username}:@${remoteHost}/share $mountPoint"
+
+    mountCmd="mount $readOnlyOption -t $fsType -o nodev,nosuid //${username}@${remoteHost}${remotePath} $mountPoint"
+
     if [[ $isDryRun ]]; then
 	cmd="echo \"Would have run: [$mountCmd]\""
     else
