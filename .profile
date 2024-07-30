@@ -49,4 +49,7 @@ PS1='[\h:\W \u$(__git_ps1 " (%s)")]\$ '
 # Needed for perlbrew
 source ~/perl5/perlbrew/etc/bashrc
 
+# Keep suggestd process from consuming CPU
+pkill -STOP suggestd
+
 # End of file
