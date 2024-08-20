@@ -8,6 +8,7 @@ alias del='rm -i'
 alias dir=ls
 alias gb='git branch'
 alias gba='git branch -a'
+alias gcm='git checkout main'
 alias gdcw='git diff --color -w'
 alias gs='git status'
 alias gsl='git stash list'
