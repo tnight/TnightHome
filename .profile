@@ -12,7 +12,7 @@ alias gcm='git checkout main'
 alias gdcw='git diff --color -w'
 alias gs='git status'
 alias gsl='git stash list'
-alias ls='ls -FG'
+alias ls='ls -FG --color'
 alias lsa='ls -A'
 alias lsd='ls -d'
 alias lsr='ls -R'
@@ -38,6 +38,8 @@ fi
 GIT_OAUTH_TOKEN="495d1860d90421bc553b615e356652506917b3be"
 export GIT_OAUTH_TOKEN
 
+export HOME=~
+
 LSCOLORS=gxfxcxdxbxegedabagacad
 export LSCOLORS
 
@@ -52,5 +54,8 @@ source ~/perl5/perlbrew/etc/bashrc
 
 # Keep suggestd process from consuming CPU
 pkill -STOP suggestd
+
+# Change to our home directory
+cd $HOME
 
 # End of file
