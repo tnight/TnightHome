@@ -14,34 +14,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; Trying to make AngeFTP work properly with AdHost's Windows FTP server
-;; I found this code at: 
-;; https://www.emacswiki.org/emacs-test/AngeFtp#toc3
-
-(defvar ange-ftp-windows-hosts '("216.211.129.207")
-  "List of hosts running a Windows FTP server"
-  )
-
-(defun ange-ftp-msdos-dirstyle-off ()
-  "Toggles the dirstyle of the host if listed in the
-   `ange-ftp-windows-hosts' variable. This function is intended to
-   be called from inside the hook `ange-ftp-process-startup-hook'"
-  (if (member host ange-ftp-windows-hosts)
-      (let* ((result (ange-ftp-send-cmd host user '(quote "site dirstyle")))
- 	     (line (cdr result))
- 	     (ok (car result))
- 	     (msdos (string-match "200 .+off" line))
- 	     )
- 	(if ok
- 	    (if (not msdos)
- 		(ange-ftp-send-cmd host user '(quote "site dirstyle") "Host declared to be running Windows, turning off MSDOS dirstyle")
- 	      (message "Host declared to be running Windows, and MSDOS dirstyle already off."))
- 	  (message "Host declared to be running Windows, but didn't accept DIRSTYLE command.")
- 	  )
- 	))) 
-
-(add-hook 'ange-ftp-process-startup-hook 'ange-ftp-msdos-dirstyle-off)
-
 ;; load emacs 24's package system. Add MELPA repository.
 (when (>= emacs-major-version 24)
   (require 'package)
