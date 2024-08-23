@@ -43,7 +43,7 @@ export HOME=~
 LSCOLORS=gxfxcxdxbxegedabagacad
 export LSCOLORS
 
-PATH="$HOME/bin:$PATH"
+PATH="$HOME/bin:$HOME/sbin:$PATH"
 
 # Handy GIT-oriented shell prompt
 source /usr/local/bin/git-prompt.sh
