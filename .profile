@@ -6,15 +6,29 @@ alias blts='tail /Volumes/share/b*.txt'
 alias blvs='v /Volumes/share/b*.txt'
 alias del='rm -i'
 alias dir=ls
-alias gb='git branch'
-alias gba='git branch -a'
+alias gb='git branch --color'
+alias gba='gb -a'
+alias gbaa='~/bin/git-branch.sh'
+alias gbaaa='~/bin/git-branch-all.sh'
+alias gbm='gb --merged'
+alias gcd='git checkout develop'
 alias gcm='git checkout main'
 alias gdcw='git diff --color -w'
+alias gds='git diff --stat'
 alias gds132='git diff --stat=132 -w'
 alias gf='git fetch'
+alias gfa='~/bin/git-fetch.sh'
+alias gl5='git log -5'
 alias gs='git status'
+alias gs132='git show --stat=132'
+alias gsa='~/bin/git-status.sh'
+alias gscw='git show --color -w'
 alias gsl='git stash list'
-alias ls='ls -FG --color'
+alias gsla='~/bin/git-stash-list.sh'
+alias gss='git stash show'
+alias gss132='git stash show --stat=132'
+alias gsscpw='git stash show --color --patch -w'
+alias ls='ls -CFG --color'
 alias lsa='ls -A'
 alias lsd='ls -d'
 alias lsr='ls -R'
@@ -33,8 +47,10 @@ alias vh='v -h'
 alias vr='v -R'
 alias vt='v -t'
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if command -v brew &> /dev/null; then
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 fi
 
 GIT_OAUTH_TOKEN="495d1860d90421bc553b615e356652506917b3be"
@@ -47,17 +63,18 @@ export LSCOLORS
 
 PATH="$HOME/bin:$HOME/sbin:$PATH"
 
-# Handy GIT-oriented shell prompt
-source /usr/local/bin/git-prompt.sh
-PS1='[\h:\W \u$(__git_ps1 " (%s)")]\$ '
-
-# Needed for perlbrew
-source ~/perl5/perlbrew/etc/bashrc
-
 # Keep suggestd process from consuming CPU
-pkill -STOP suggestd
+if command -v pkill &> /dev/null; then
+    pkill -STOP suggestd
+fi
 
 # Change to our home directory
 cd $HOME
+
+# Detect when we are running inside Emacs and make a few changes.
+if [ -n "$INSIDE_EMACS" ]; then
+    echo "We are inside Emacs!"
+    export PS1='\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\][\w]\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
+fi
 
 # End of file
