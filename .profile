@@ -84,7 +84,13 @@ cd $HOME
 # Detect when we are running inside Emacs and make a few changes.
 if [ -n "$INSIDE_EMACS" ]; then
     echo "We are inside Emacs!"
+
+    if [ -z "$MSYSTEM" ]; then
+        export MSYSTEM=`uname -m`
+    fi
+
     export PS1='\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\][\w]\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
+    export TERM=emacs
 fi
 
 # End of file

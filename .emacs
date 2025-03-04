@@ -4,9 +4,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(explicit-bash-args (quote ("--login" "-i")))
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   '(csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode))
+   (quote
+    (bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode)))
  '(save-place t nil (saveplace))
  '(show-paren-mode t))
 (custom-set-faces
