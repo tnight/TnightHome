@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(explicit-bash-args (quote ("--login" "-i")))
  '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
@@ -96,7 +97,6 @@
 ;; BEGIN: settings for dirtrack-mode, a minor mode of shell-mode.
 (setq dirtrack-list '("\\(\\[.*?\\]\\)" 1 nil))
 ;; END: settings for dirtrack-mode, a minor mode of shell-mode.
-
 
 ;; BEGIN: Disable upcase-region by default to prevent accidental usage.
 (put 'upcase-region 'disabled nil)

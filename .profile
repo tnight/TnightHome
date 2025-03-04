@@ -48,9 +48,19 @@ alias vr='v -R'
 alias vt='v -t'
 
 if command -v brew &> /dev/null; then
+    # Mac OS X with Brew
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
+elif [ -f /etc/git-completion.bash ]; then
+    # Generic Unix
+    . /etc/git-completion.bash
+elif [ -f /mingw64/share/git/completion/git-completion.bash ]; then
+    # Windows with Git Bash
+    . /mingw64/share/git/completion/git-completion.bash
+elif [ -f ~/.git-completion.bash ]; then
+    # Local to the User
+    . ~/.git-completion.bash
 fi
 
 GIT_OAUTH_TOKEN="495d1860d90421bc553b615e356652506917b3be"
@@ -74,7 +84,13 @@ cd $HOME
 # Detect when we are running inside Emacs and make a few changes.
 if [ -n "$INSIDE_EMACS" ]; then
     echo "We are inside Emacs!"
+
+    if [ -z "$MSYSTEM" ]; then
+        export MSYSTEM=`uname -m`
+    fi
+
     export PS1='\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\][\w]\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
+    export TERM=emacs
 fi
 
 # End of file
