@@ -6,8 +6,7 @@
  '(column-number-mode t)
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   (quote
-    (bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode)))
+   '(csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode))
  '(save-place t nil (saveplace))
  '(show-paren-mode t))
 (custom-set-faces
@@ -96,7 +95,6 @@
 ;; BEGIN: settings for dirtrack-mode, a minor mode of shell-mode.
 (setq dirtrack-list '("\\(\\[.*?\\]\\)" 1 nil))
 ;; END: settings for dirtrack-mode, a minor mode of shell-mode.
-
 
 ;; BEGIN: Disable upcase-region by default to prevent accidental usage.
 (put 'upcase-region 'disabled nil)

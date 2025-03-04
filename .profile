@@ -48,9 +48,19 @@ alias vr='v -R'
 alias vt='v -t'
 
 if command -v brew &> /dev/null; then
+    # Mac OS X with Brew
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
+elif [ -f /etc/git-completion.bash ]; then
+    # Generic Unix
+    . /etc/git-completion.bash
+elif [ -f /mingw64/share/git/completion/git-completion.bash ]; then
+    # Windows with Git Bash
+    . /mingw64/share/git/completion/git-completion.bash
+elif [ -f ~/.git-completion.bash ]; then
+    # Local to the User
+    . ~/.git-completion.bash
 fi
 
 GIT_OAUTH_TOKEN="495d1860d90421bc553b615e356652506917b3be"
