@@ -19,7 +19,7 @@
  )
 
 ;; BEGIN: Make cperl-mode the default for Perl files.
-(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
+(fset 'perl-mode 'cperl-mode)
 ;; END: Make cperl-mode the default for Perl files.
 
 ;; BEGIN: load emacs 24's package system. Add MELPA repository.
