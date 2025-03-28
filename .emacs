@@ -16,6 +16,13 @@
 ;;
 ;; END: Choose the best monospace font available.
 
+;; BEGIN: Set initial window size.
+(setq initial-frame-alist
+      (append initial-frame-alist
+              '((width  . 120)
+                (height .  48))))
+;; END: Set initial window size.
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
