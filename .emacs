@@ -1,5 +1,20 @@
-(when initial-window-system ;; i-w-s from stack exchange
-  (add-to-list 'default-frame-alist '(font . "Consolas-10")))
+;; BEGIN: Choose the best monospace font available.
+;;
+;; Test char and monospace:
+;; 0123456789abcdefghijklmnopqrstuvwxyz [] () :;,. !@#$^&*
+;; 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ {} <> "'`  ~-_/|\?
+;;
+(cond
+ ((find-font (font-spec :name "Consolas"))
+  (set-frame-font "Consolas-10"))
+ ((find-font (font-spec :name "Lucida Console"))
+  (set-frame-font "Lucida Console-10"))
+ ((find-font (font-spec :name "Monaco"))
+  (set-frame-font "Monaco-10"))
+ ((find-font (font-spec :name "courier"))
+  (set-frame-font "courier-10")))
+;;
+;; END: Choose the best monospace font available.
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -8,12 +23,6 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(explicit-bash-args (quote ("--login" "-i")))
- '(face-font-family-alternatives
-   (quote
-    (("Consolas" "fixed")
-     ("Consolas" "FreeMono" "Monaco" "Nimbus Mono L" "fixed")
-     ("Sans Serif" "helv" "helvetica" "arial" "fixed")
-     ("helv" "helvetica" "arial" "fixed"))))
  '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
