@@ -1,20 +1,34 @@
+;; BEGIN: Choose the best monospace font available.
+;;
+;; Test char and monospace:
+;; 0123456789abcdefghijklmnopqrstuvwxyz [] () :;,. !@#$^&*
+;; 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ {} <> "'`  ~-_/|\?
+;;
+(cond
+ ((find-font (font-spec :name "Consolas"))
+  (set-frame-font "Consolas-10"))
+ ((find-font (font-spec :name "Lucida Console"))
+  (set-frame-font "Lucida Console-10"))
+ ((find-font (font-spec :name "Monaco"))
+  (set-frame-font "Monaco-10"))
+ ((find-font (font-spec :name "courier"))
+  (set-frame-font "courier-10")))
+;;
+;; END: Choose the best monospace font available.
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(explicit-bash-args '("--login" "-i"))
+ '(explicit-bash-args (quote ("--login" "-i")))
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   '(bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode))
- '(save-place t nil (saveplace)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight regular :height 98 :width normal)))))
+   (quote
+    (bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode)))
+ '(save-place t nil (saveplace))
+ '(show-paren-mode t))
 
 ;; BEGIN: Make cperl-mode the default for Perl files.
 (fset 'perl-mode 'cperl-mode)
