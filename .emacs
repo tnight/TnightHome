@@ -4,17 +4,20 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(explicit-bash-args '("--login" "-i"))
+ '(explicit-bash-args (quote ("--login" "-i")))
+ '(face-font-family-alternatives
+   (quote
+    (("Monospace" "courier" "fixed")
+     ("Monospace Serif" "Courier 10 Pitch" "Consolas" "Courier Std" "FreeMono" "Monaco" "Nimbus Mono L" "courier" "fixed")
+     ("courier" "CMU Typewriter Text" "fixed")
+     ("Sans Serif" "helv" "helvetica" "arial" "fixed")
+     ("helv" "helvetica" "arial" "fixed"))))
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   '(bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode))
- '(save-place t nil (saveplace)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight regular :height 98 :width normal)))))
+   (quote
+    (bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode)))
+ '(save-place t nil (saveplace))
+ '(show-paren-mode t))
 
 ;; BEGIN: Make cperl-mode the default for Perl files.
 (fset 'perl-mode 'cperl-mode)
