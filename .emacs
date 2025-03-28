@@ -1,3 +1,6 @@
+(when initial-window-system ;; i-w-s from stack exchange
+  (add-to-list 'default-frame-alist '(font . "Consolas-10")))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -7,9 +10,8 @@
  '(explicit-bash-args (quote ("--login" "-i")))
  '(face-font-family-alternatives
    (quote
-    (("Monospace" "courier" "fixed")
-     ("Monospace Serif" "Courier 10 Pitch" "Consolas" "Courier Std" "FreeMono" "Monaco" "Nimbus Mono L" "courier" "fixed")
-     ("courier" "CMU Typewriter Text" "fixed")
+    (("Consolas" "fixed")
+     ("Consolas" "FreeMono" "Monaco" "Nimbus Mono L" "fixed")
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(indent-tabs-mode nil)
