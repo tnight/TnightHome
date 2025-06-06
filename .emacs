@@ -127,4 +127,9 @@
 (global-set-key (kbd "C-x C-k 1") 'meeting-template)
 ;; END: Define the meeting template macro, an example for future macros.
 
+;; BEGIN: On the Mac, do not to try to use --dired because it is not supported.
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
+;; END: On the Mac, do not to try to use --dired because it is not supported.
+
 ;; END of .emacs
