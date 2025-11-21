@@ -132,4 +132,16 @@
   (setq dired-use-ls-dired nil))
 ;; END: On the Mac, do not to try to use --dired because it is not supported.
 
+;; BEGIN: Confirm before quit (C-x C-c isn't always fat finger friendly...)
+;; kill-emacs-query-functions
+(add-hook 'kill-emacs-query-functions (lambda () (y-or-n-p "Do you really want to exit Emacs? ")) 'append)
+;; END: Confirm before quit (C-x C-c isn't always fat finger friendly...)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
 ;; END of .emacs
