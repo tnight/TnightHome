@@ -63,9 +63,6 @@ elif [ -f ~/.git-completion.bash ]; then
     . ~/.git-completion.bash
 fi
 
-GIT_OAUTH_TOKEN="495d1860d90421bc553b615e356652506917b3be"
-export GIT_OAUTH_TOKEN
-
 export HOME=~
 
 LSCOLORS=gxfxcxdxbxegedabagacad

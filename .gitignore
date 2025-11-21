@@ -7,4 +7,7 @@
 # Ignore log files
 *.*log
 
+# Ignore the GG Shield cache
+.cache_ggshield
+
 # [end]
