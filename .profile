@@ -47,6 +47,13 @@ alias vh='v -h'
 alias vr='v -R'
 alias vt='v -t'
 
+export HOME=~
+
+LSCOLORS=gxfxcxdxbxegedabagacad
+export LSCOLORS
+
+PATH="$HOME/bin:$HOME/sbin:/opt/homebrew/bin:$PATH"
+
 if command -v brew &> /dev/null; then
     # Mac OS X with Brew
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -62,13 +69,6 @@ elif [ -f ~/.git-completion.bash ]; then
     # Local to the User
     . ~/.git-completion.bash
 fi
-
-export HOME=~
-
-LSCOLORS=gxfxcxdxbxegedabagacad
-export LSCOLORS
-
-PATH="$HOME/bin:$HOME/sbin:$PATH"
 
 # Keep suggestd process from consuming CPU
 if command -v pkill &> /dev/null; then
