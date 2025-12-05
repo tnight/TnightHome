@@ -56,8 +56,8 @@ PATH="$HOME/bin:$HOME/sbin:/opt/homebrew/bin:$PATH"
 
 if command -v brew &> /dev/null; then
     # Mac OS X with Brew
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
+    if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+        . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
     fi
 elif [ -f /etc/git-completion.bash ]; then
     # Generic Unix
