@@ -54,6 +54,30 @@ export LSCOLORS
 
 PATH="$HOME/bin:$HOME/sbin:/opt/homebrew/bin:$PATH"
 
+#
+# Git Prompt
+#
+
+if command -v brew &> /dev/null; then
+    # Mac OS X with Brew
+    if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
+        . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+    fi
+elif [ -f /etc/git-prompt.sh ]; then
+    # Generic Unix
+    . /etc/git-prompt.sh
+elif [ -f /mingw64/share/git/completion/git-prompt.sh ]; then
+    # Windows with Git Bash
+    . /mingw64/share/git/completion/git-prompt.sh
+elif [ -f ~/.git-prompt.sh ]; then
+    # Local to the User
+    . ~/.git-prompt.sh
+fi
+
+#
+# Git Completion
+#
+
 if command -v brew &> /dev/null; then
     # Mac OS X with Brew
     if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
@@ -81,16 +105,19 @@ fi
 # Change to our home directory
 cd $HOME
 
+# Set up our shell prompt
+if [ -z "$MSYSTEM" ]; then
+    export MSYSTEM=`uname -m`
+fi
+
+export PS1='\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\][\w]\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
+
 # Detect when we are running inside Emacs and make a few changes.
 if [ -n "$INSIDE_EMACS" ]; then
     echo "We are inside Emacs!"
 
-    if [ -z "$MSYSTEM" ]; then
-        export MSYSTEM=`uname -m`
-    fi
-
-    export PS1='\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\][\w]\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
-    export TERM=emacs
+    # Best used with M-x ansi-term
+    export TERM=ansi
 fi
 
 # End of file
