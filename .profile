@@ -116,7 +116,10 @@ export PS1='\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\][\w]\[\033[36m\
 if [ -n "$INSIDE_EMACS" ]; then
     echo "We are inside Emacs!"
 
-    # Best used with M-x ansi-term
+    # Rather than paginate, output flows into the Emacs shell buffer.
+    export GIT_PAGER="cat"
+
+    # Give our shell window a reasonable value that Emacs can handle.
     export TERM=ansi
 fi
 
