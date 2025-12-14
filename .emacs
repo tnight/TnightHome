@@ -41,6 +41,10 @@
 (fset 'perl-mode 'cperl-mode)
 ;; END: Make cperl-mode the default for Perl files.
 
+;; BEGIN: Make cperl-mode the default for Perl test files.
+(add-to-list 'auto-mode-alist '("\\.t\\'" . cperl-mode))
+;; END: Make cperl-mode the default for Perl test files.
+
 ;; BEGIN: load emacs 24's package system. Add MELPA repository.
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
