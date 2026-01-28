@@ -56,6 +56,10 @@ fi
 # Set up Perl to look for CPAN modules in our local library.
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
+# Set up Ruby version management.
+. /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+. /opt/homebrew/opt/chruby/share/chruby/auto.sh
+
 # Keep suggestd process from consuming CPU
 if command -v pkill &> /dev/null; then
     pkill -STOP suggestd
