@@ -29,11 +29,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(explicit-bash-args (quote ("--login" "-i")))
+ '(explicit-bash-args '("--login" "-i"))
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   (quote
-    (bash-completion csharp-mode csv-mode git less-css-mode magit markdown-mode powershell swift-mode)))
+   '(bash-completion csharp-mode csv-mode git io-mode less-css-mode magit
+                     markdown-mode powershell swift-mode))
  '(save-place t nil (saveplace))
  '(show-paren-mode t))
 
@@ -74,7 +74,6 @@
            (setq shell-file-name explicit-shell-file-name)
            (setq explicit-sh.exe-args '("--login" "-i"))
            (setenv "SHELL" shell-file-name)
-           ;;;;(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 	   (add-to-list 'exec-path "C:/Program Files/Git/bin")))
 ;; END: Settings for using Git-Bash as our shell.
 
@@ -140,6 +139,12 @@
 ;; kill-emacs-query-functions
 (add-hook 'kill-emacs-query-functions (lambda () (y-or-n-p "Do you really want to exit Emacs? ")) 'append)
 ;; END: Confirm before quit (C-x C-c isn't always fat finger friendly...)
+
+;; BEGIN: Explicitly set tab width for Io mode because the custom variable is not working.
+(add-hook 'io-mode-hook (lambda ()
+                          (setq tab-width 4)
+                          (setq io-tab-width 4)))
+;; END: Explicitly set tab width for Io mode because the custom variable is not working.
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
