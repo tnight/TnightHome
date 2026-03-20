@@ -45,6 +45,10 @@
 (add-to-list 'auto-mode-alist '("\\.t\\'" . cperl-mode))
 ;; END: Make cperl-mode the default for Perl test files.
 
+;; BEGIN: Make prolog-mode the default for Prolog files.
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . prolog-mode))
+;; END: Make prolog-mode the default for Prolog files.
+
 ;; BEGIN: load emacs 24's package system. Add MELPA repository.
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
