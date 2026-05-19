@@ -37,6 +37,7 @@ alias m2j='mp3ToJpg.sh'
 alias mtro='mount-ts.sh --read-only'
 alias mtrw='mount-ts.sh --read-write'
 alias r='fc -e -'
+alias rg='rg --pre ~/sbin/rg-preproc.sh --pre-glob '\''*.doc'\'' --pre-glob '\''*.docx'\'' --pre-glob '\''*.pdf'\'' --pre-glob '\''*.rtf'\'
 alias umt='mount-ts.sh --unmount'
 alias umtf='mount-ts.sh --force --unmount'
 alias v=vdir
