@@ -11,7 +11,7 @@ LSCOLORS=gxfxcxdxbxegedabagacad
 export LSCOLORS
 
 # Set up our path the way we want it.
-PATH="$HOME/bin:$HOME/sbin:/opt/homebrew/bin:$PATH"
+PATH="$HOME/bin:$HOME/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 #
 # Git Prompt

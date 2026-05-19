@@ -33,7 +33,7 @@
  '(indent-tabs-mode nil)
  '(package-selected-packages
    '(bash-completion csharp-mode csv-mode git io-mode less-css-mode magit
-                     markdown-mode powershell swift-mode))
+                     markdown-mode powershell scala-mode swift-mode))
  '(save-place t nil (saveplace))
  '(show-paren-mode t))
 
