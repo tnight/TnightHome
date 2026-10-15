@@ -1,3 +1,5 @@
+;; -*- lexical-binding: nil; -*-
+
 ;; BEGIN: Choose the best monospace font available.
 ;;
 ;; Test char and monospace:
@@ -32,10 +34,20 @@
  '(explicit-bash-args '("--login" "-i"))
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   '(bash-completion csharp-mode csv-mode git io-mode less-css-mode magit
-                     markdown-mode powershell scala-mode swift-mode))
+   '(anki-editor bash-completion csharp-mode csv-mode git io-mode
+                 less-css-mode magit markdown-mode powershell
+                 scala-mode swift-mode with-editor))
  '(save-place t nil (saveplace))
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(warning-suppress-log-types
+   '((files missing-lexbind-cookie
+            "~/.emacs.d/elpa/git-20140128.1041/git-autoloads.el")
+     (files missing-lexbind-cookie
+            "~/.emacs.d/elpa/f-20241003.1131/f-autoloads.el")
+     (files missing-lexbind-cookie
+            "~/.emacs.d/elpa/git-commit-20200207.1819/git-commit-autoloads.el")
+     (files missing-lexbind-cookie
+            "~/.emacs.d/elpa/less-css-mode-20161001.453/less-css-mode-autoloads.el"))))
 
 ;; BEGIN: Make cperl-mode the default for Perl files.
 (fset 'perl-mode 'cperl-mode)
