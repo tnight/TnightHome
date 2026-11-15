@@ -1,5 +1,12 @@
 ;; -*- lexical-binding: nil; -*-
 
+;; BEGIN: Fix gcc compiler error
+(when (eq system-type 'darwin)
+  (setenv "MACOSX_DEPLOYMENT_TARGET"
+          (or (getenv "MACOSX_DEPLOYMENT_TARGET")
+              (string-trim (shell-command-to-string "sw_vers -productVersion")))))
+;; END: Fix gcc compiler error
+
 ;; BEGIN: Choose the best monospace font available.
 ;;
 ;; Test char and monospace:
